@@ -1,6 +1,6 @@
 const apiData = {
-  baseUrl: "api.investmentcapital.vercel.app",
-  secure: true,
+  baseUrl: "localhost:3000",
+  secure: false,
 };
 
 export default apiData;

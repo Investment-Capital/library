@@ -10,6 +10,8 @@
 
 # Setup
 
+- Run "npm install investmentcapital.js"
+
 ## Local
 
 ```ts

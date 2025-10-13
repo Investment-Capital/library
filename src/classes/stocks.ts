@@ -1,6 +1,7 @@
 import fetchUrl from "../fetchUrl";
 import StockConfig from "../types/stockConfig";
 import StockMarketHistory from "../types/stockMarketHistory";
+import webSocket from "../webSocket";
 
 class Stocks {
   static config = () => fetchUrl<StockConfig[]>("stocks/config");
@@ -43,6 +44,18 @@ class Stocks {
         authorization,
       },
     });
+
+  static webSocket = () =>
+    webSocket<
+      | {
+          type: "config";
+          data: StockConfig;
+        }
+      | {
+          type: "market";
+          data: StockMarketHistory;
+        }
+    >("stocks/updates");
 }
 
 export default Stocks;
