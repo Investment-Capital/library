@@ -5,39 +5,58 @@ import webSocket from "../webSocket";
 
 class Stocks {
   static config = () => fetchUrl<StockConfig[]>("stocks/config");
-  static configEdit = (
-    name: string,
-    config: Omit<StockConfig, "name">,
+
+  static edit = (
+    id: string,
+    config: Partial<Omit<StockConfig, "id">>,
     authorization: string
   ) =>
-    fetchUrl<StockConfig>(`stocks/config/${name}`, {
+    fetchUrl<{ id: string }>(`stocks/edit/${id}`, {
       method: "POST",
       headers: { authorization },
       body: JSON.stringify(config),
     });
 
+  static delete = (id: string, authorization: string) =>
+    fetchUrl<{ id: string }>(`stocks/delete/${id}`, {
+      method: "POST",
+      headers: { authorization },
+    });
+
+  static create = (
+    data: Omit<StockConfig, "id"> & {
+      startingPrice: number;
+    },
+    authorization: string
+  ) =>
+    fetchUrl<StockConfig>(`stocks/create`, {
+      method: "POST",
+      headers: { authorization },
+      body: JSON.stringify(data),
+    });
+
   static market = () => fetchUrl<StockMarketHistory[]>("stocks/market");
-  static marketHistory = (stock: string, time: number) =>
-    fetchUrl<Omit<StockMarketHistory, "stock">[]>(
-      `stocks/market/${stock}?time=${time}`
+  static marketHistory = (id: string, time: number) =>
+    fetchUrl<Omit<StockMarketHistory, "id">[]>(
+      `stocks/market/${id}?time=${time}`
     );
 
-  static buy = (stock: string, amount: number, authorization: string) =>
+  static buy = (id: string, amount: number, authorization: string) =>
     fetchUrl<{ cost: number }>("stocks/buy", {
       method: "POST",
       body: JSON.stringify({
-        stock,
+        id,
         amount,
       }),
       headers: {
         authorization,
       },
     });
-  static sell = (stock: string, amount: number, authorization: string) =>
+  static sell = (id: string, amount: number, authorization: string) =>
     fetchUrl<{ salesPrice: number }>("stocks/sell", {
       method: "POST",
       body: JSON.stringify({
-        stock,
+        id,
         amount,
       }),
       headers: {
