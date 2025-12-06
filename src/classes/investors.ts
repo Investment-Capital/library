@@ -5,7 +5,7 @@ import webSocket from "../webSocket";
 
 class Investors {
   static lookup = (id: string) => fetchUrl<Investor>(`investors/lookup/${id}`);
-  static search = (search: string, page: number) =>
+  static search = (search: string, page: number = 1) =>
     fetchUrl<Investor["account"]["profile"][]>(
       `investors/search?search=${search}&page=${page}`
     );

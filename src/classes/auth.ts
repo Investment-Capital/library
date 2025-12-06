@@ -16,6 +16,8 @@ class Auth {
       method: "POST",
       body: JSON.stringify({ username, password }),
     });
+
+  static investorId = (authorization: string) => authorization.split(" ")[0];
 }
 
 export default Auth;
