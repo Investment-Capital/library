@@ -8,7 +8,7 @@ type Investor = {
 
   cash: number;
   prestige: number;
-  stocks: Record<string, number>;
+  stocks: Record<string, number | undefined>;
 
   admin: boolean;
   created: number;
