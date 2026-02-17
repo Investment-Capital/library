@@ -7,6 +7,7 @@ type Investor = {
   };
 
   cash: number;
+  xp: number;
   prestige: number;
   stocks: Record<string, number | undefined>;
 
