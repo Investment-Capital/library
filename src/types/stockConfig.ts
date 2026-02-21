@@ -6,6 +6,7 @@ type StockConfig = {
   maxTaxPercentage: number;
   dividendPercentage: number;
   defaultOwnershipLimit: number;
+  levelRequirement: number;
   id: string;
 };
 
